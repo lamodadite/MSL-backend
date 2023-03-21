@@ -1,5 +1,6 @@
 package Maswillaeng.MSLback.service;
 
+import Maswillaeng.MSLback.common.exception.S3FileUploadException;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.ObjectMetadata;
@@ -33,15 +34,15 @@ public class AwsS3Service {
     private String bucket;
 
 
-    public  Map<String,String> AwsUploadImage(MultipartFile imageFile) throws IOException {
-        byte[] imageData = imageFile.getBytes();
-        UUID uuid = UUID.randomUUID();
+    public  Map<String,String> AwsUploadImage(MultipartFile imageFile) {
         String uploadUrl = "";
-        String savedFileName = uuid.toString() + "_" + imageFile.getOriginalFilename();
         try {
+            byte[] imageData = imageFile.getBytes();
+            UUID uuid = UUID.randomUUID();
+            String savedFileName = uuid.toString() + "_" + imageFile.getOriginalFilename();
             uploadUrl = s3uploadImage(savedFileName, imageFile);
         }catch (Exception e){
-            throw  new FileUploadException("업로드 실패");
+            throw new S3FileUploadException();
         }
         Map<String,String> imagePath = new HashMap<>();
         imagePath.put("img",uploadUrl);
@@ -55,7 +56,7 @@ public class AwsS3Service {
 
         amazonS3Client.putObject(new PutObjectRequest(bucket, savedFileName,imageFile.getInputStream(),metadata));
 
-              return amazonS3Client.getUrl(bucket,savedFileName).toString();
+        return amazonS3Client.getUrl(bucket,savedFileName).toString();
     }
 
 }
