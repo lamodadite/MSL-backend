@@ -26,6 +26,9 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x ./MSL-back/gradlew
         shell: bash
+        
+      - name : get pwd
+        run: pwd
       
       - name: Build with Gradle
         run: ./gradlew build
