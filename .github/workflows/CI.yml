@@ -2,11 +2,11 @@ name: Build & Deploy to AWS EC2
 
 on:
   push:
-    branches: [ develop ]
+    branches: [ main ]
   pull_request:
-    branches: [ develop ]
-env:
-  S3_BUCKET_NAME: ayo-springboot-build
+    branches: [ main ]
+# env:
+#   S3_BUCKET_NAME:
   
 jobs:
   build:
