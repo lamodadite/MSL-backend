@@ -27,9 +27,7 @@ jobs:
         run: chmod +x ./MSL-back/gradlew
         shell: bash
         
-      - name : get pwd
-        run: pwd
       
       - name: Build with Gradle
-        run: ./gradlew build
+        run: ./MSL-back/gradlew build
         shell: bash
