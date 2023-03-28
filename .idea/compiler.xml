@@ -21,7 +21,7 @@
         <module name="Maswillaeng.MSL-back.main" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
+    <bytecodeTargetLevel target="19">
       <module name="MSL-back.MSL-back.main~1" target="1.8" />
       <module name="MSL-back.MSL-back.test~1" target="1.8" />
     </bytecodeTargetLevel>
