@@ -22,12 +22,15 @@ jobs:
         with:
           java-version: '17'
           distribution: 'zulu'
+          
+      - name: move to MSL-back
+        run: cd MSL-back
 
       - name: Grant execute permission for gradlew
-        run: chmod +x ./MSL-back/gradlew
+        run: chmod +x ./gradlew
         shell: bash
         
       
       - name: Build with Gradle
-        run: ./MSL-back/gradlew build
+        run: ./gradlew build
         shell: bash
