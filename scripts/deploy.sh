@@ -12,6 +12,6 @@ else
   sleep 5
 fi
 
-cd /home/ec2-user/app
+cd ~/app
 sudo docker build -t msl-spring-boot-app .
 sudo docker run -d -p 8080:8080 msl-spring-boot-app
