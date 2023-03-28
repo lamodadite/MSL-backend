@@ -29,5 +29,5 @@ jobs:
         
       
       - name: Build with Gradle
-        run: ./MSL-back/gradlew build
+        run: ./MSL-back/gradlew bootjar
         shell: bash
