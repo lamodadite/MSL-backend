@@ -5,7 +5,7 @@ on:
     branches: [ main ] 
 
 env:
-  S3_BUCKET_NAME: project-bucket-v1
+  S3_BUCKET_NAME: mas-s3bucket
   PROJECT_NAME: MSL-backend
   
 jobs:
