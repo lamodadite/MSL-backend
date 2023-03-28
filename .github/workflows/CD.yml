@@ -40,10 +40,18 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
           
-      # script files 복사
       - name: Copy script
         run: cp ./scripts/*.sh ./deploy
-      
-      # S3에 업로드
+
       - name: Upload to S3
         run: aws s3 cp --region ap-northeast-2 ./$GITHUB_SHA.zip s3://$S3_BUCKET_NAME/$PROJECT_NAME/$GITHUB_SHA.zip
+        
+      - name: Deploy
+        run: |
+          aws deploy create-deployment \
+          --application-name MSL-backend \
+          --deployment-config-name CodeDeployDefault.AllAtOnce \
+          --deployment-group-name MSL \
+          --file-exists-behavior OVERWRITE \
+          --s3-location bucket=mas-s3bucket,bundleType=zip,key=MSL-backend/$GITHUB_SHA.zip \
+          --region ap-northeast-2 \
