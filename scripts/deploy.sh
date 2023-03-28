@@ -13,5 +13,5 @@ else
 fi
 
 cd /home/ec2-user/app
-sudo docker build -t tcat-api-spring-boot-docker .
-sudo docker run -d -p 8080:8080 tcat-api-spring-boot-docker
+sudo docker build -t msl-spring-boot-app .
+sudo docker run -d -p 8080:8080 msl-spring-boot-app
