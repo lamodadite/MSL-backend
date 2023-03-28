@@ -12,6 +12,11 @@ else
   sleep 5
 fi
 
-cd ~/app
+S3_BUCKET="mas-s3bucket"
+S3_KEY_PREFIX="MSL-backend"
+
+aws s3 sync s3://$S3_BUCKET/$S3_KEY_PREFIX/ /home/ec2-user/app/ --delete --exclude "*" --include "*.jar"
+
+cd /home/ec2-user/app/
 sudo docker build -t msl-spring-boot-app .
 sudo docker run -d -p 8080:8080 msl-spring-boot-app
