@@ -43,7 +43,7 @@ jobs:
           mkdir deploy
           cp ./build/libs/*.jar ./deploy/
           cp ./appspec.yml ./deploy/
-          cp ./sprips/deploy.sh ./deploy/
+          cp ./scripts/deploy.sh ./deploy/
           zip -r -qq -j ./msl-build.zip ./deploy
 
       - name: Configure AWS credentials
