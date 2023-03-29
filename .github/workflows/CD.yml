@@ -44,6 +44,7 @@ jobs:
           cp ./build/libs/*.jar ./deploy/
           cp ./appspec.yml ./deploy/
           cp ./scripts/deploy.sh ./deploy/
+          cp ./Dockerfile ./deploy/
           zip -r -qq -j ./msl-build.zip ./deploy
 
       - name: Configure AWS credentials
