@@ -3,11 +3,11 @@ os: linux
 
 files:
   - source: / 
-    destination: /home/ec2-user/app
+    destination: /home/ubuntu/app
     overwrite: yes
 
 hooks:
   ApplicationStart:
     - location: deploy.sh
       timeout: 60 
-      runas: ec2-user
+      runas: ubuntu
