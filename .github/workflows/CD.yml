@@ -60,5 +60,4 @@ jobs:
         run: aws deploy create-deployment --application-name MSL-backend
           --deployment-config-name CodeDeployDefault.OneAtATime
           --deployment-group-name MSL
-          --s3-location bucket=$S3_BUCKET_NAME,bundleType=zip,key=MSL-backend/$GITHUB_SHA.zip \
-          --region ap-northeast-2
+          --s3-location bucket=$S3_BUCKET_NAME,bundleType=zip,key=MSL-backend/$GITHUB_SHA.zip
