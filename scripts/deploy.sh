@@ -14,4 +14,4 @@ fi
 
 cd /home/unbuntu/app
 sudo docker build -t msl-spring-boot-app .
-sudo docker run -d -p 8080:8080 msl-spring-boot-app
+sudo docker run -d --name msl-spring-boot-app -p 8080:8080 msl-spring-boot-app
