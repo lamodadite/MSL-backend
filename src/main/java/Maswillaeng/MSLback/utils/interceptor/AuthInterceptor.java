@@ -1,5 +1,6 @@
 package Maswillaeng.MSLback.utils.interceptor;
 
+import Maswillaeng.MSLback.common.exception.NotAuthorizedException;
 import Maswillaeng.MSLback.utils.auth.AuthCheck;
 import Maswillaeng.MSLback.utils.auth.TokenUserData;
 import Maswillaeng.MSLback.utils.auth.UserContext;
@@ -12,19 +13,22 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.nio.file.AccessDeniedException;
 
 @ComponentScan
 @NoArgsConstructor
 public class AuthInterceptor implements HandlerInterceptor, Ordered {
+
+    private static final String PRESENT_REPORT = "해당 요청";
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
 
         HandlerMethod handlerMethod;
 
-        if (!(handler instanceof HandlerMethod))
+        if (!(handler instanceof HandlerMethod)){
             return true;
+        }
+
         handlerMethod = (HandlerMethod) handler;
 
         AuthCheck auth = handlerMethod.getMethodAnnotation(AuthCheck.class);
@@ -35,29 +39,21 @@ public class AuthInterceptor implements HandlerInterceptor, Ordered {
         TokenUserData userData = UserContext.userData.get();
 
         if (userData == null) {
-            new NullPointerException("토큰이 없습니다.");
-            return false;
+            throw new NotAuthorizedException(PRESENT_REPORT);
         }
 
-        if (auth.role().equals(AuthCheck.Role.USER)) {
-            if (!userData.getUserRole().equals(AuthCheck.Role.USER.toString())) {
-                new AccessDeniedException("접근권한이 없습니다.");
-                return false;
-            }
-        }
+        int userRoleLevel = AuthCheck.Role.valueOf(userData.getUserRole()).getLevel();
+        int requiredRoleLevel = auth.role().getLevel();
 
-        if (auth.role().equals(AuthCheck.Role.ADMIN)) {
-            if (!userData.getUserRole().equals(AuthCheck.Role.ADMIN.toString())) {
-                new AccessDeniedException("접근권한이 없습니다.");
-                return false;
-            }
+        if (userRoleLevel < requiredRoleLevel) {
+            throw new NotAuthorizedException(PRESENT_REPORT);
         }
 
         return true;
     }
 
     @Override
-    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) {
         UserContext.remove();
     }
 
