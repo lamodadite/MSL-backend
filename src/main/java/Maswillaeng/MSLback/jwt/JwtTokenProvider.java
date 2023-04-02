@@ -1,7 +1,9 @@
 package Maswillaeng.MSLback.jwt;
 
 import Maswillaeng.MSLback.domain.enums.RoleType;
-import io.jsonwebtoken.*;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
@@ -19,11 +21,9 @@ public class JwtTokenProvider implements InitializingBean {
     @Value("${secret.access}")
     private String SECRET_KEY;
 
-    public static final long ACCESS_TOKEN_VALID_TIME = 1000 * 60 * 60; // 1시간
-//    private final long ACCESS_TOKEN_VALID_TIME = 1; // 만료 테스트
-    public static final long REFRESH_TOKEN_VALID_TIME = 1000 * 60 * 60 * 24; // 24시간
-
-    public static final long PASSWORD_RESET_TOKEN_VALID_TIME = 1000 * 60 * 10; // 10분
+    public static final long ACCESS_TOKEN_VALID_TIME = 1000 * 60 * 60;
+    public static final long REFRESH_TOKEN_VALID_TIME = 1000 * 60 * 60 * 24;
+    public static final long PASSWORD_RESET_TOKEN_VALID_TIME = 1000 * 60 * 10;
 
 
     @Override
@@ -36,32 +36,32 @@ public class JwtTokenProvider implements InitializingBean {
 
         Date now = new Date();
         return Jwts.builder()
-                .setClaims(claims) // 정보 저장
-                .setIssuedAt(now) // 토큰 발행 시간 정보
-                .setExpiration(new Date(now.getTime() + PASSWORD_RESET_TOKEN_VALID_TIME)) // set Expire Time
-                .signWith(SignatureAlgorithm.HS256, SECRET_KEY)  // 사용할 암호화 알고리즘과
+                .setClaims(claims)
+                .setIssuedAt(now)
+                .setExpiration(new Date(now.getTime() + PASSWORD_RESET_TOKEN_VALID_TIME))
+                .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
                 .compact();
     }
 
 
     public String createAccessToken(Long userId, RoleType roleType) {
-        Claims claims = Jwts.claims();//.setSubject(userPk); // JWT payload 에 저장되는 정보단위
+        Claims claims = Jwts.claims();
         claims.put("userId", userId);
         claims.put("role", roleType);
 
         Date now = new Date();
         return Jwts.builder()
-                .setClaims(claims) // 정보 저장
-                .setIssuedAt(now) // 토큰 발행 시간 정보
-                .setExpiration(new Date(now.getTime() + ACCESS_TOKEN_VALID_TIME)) // set Expire Time
-                .signWith(SignatureAlgorithm.HS256, SECRET_KEY)  // 사용할 암호화 알고리즘과
+                .setClaims(claims)
+                .setIssuedAt(now)
+                .setExpiration(new Date(now.getTime() + ACCESS_TOKEN_VALID_TIME))
+                .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
                 .compact();
     }
 
 
     public String createRefreshToken(Long userId) {
         Claims claims = Jwts.claims();
-        claims.put("userId",userId);
+        claims.put("userId", userId);
         Date now = new Date();
         Date expiration = new Date(now.getTime() + REFRESH_TOKEN_VALID_TIME);
 
@@ -73,12 +73,12 @@ public class JwtTokenProvider implements InitializingBean {
     }
 
 
-    public Claims getClaims(String token){
+    public Claims getClaims(String token) {
         Claims claims = Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
         return claims;
     }
 
-    public Long getUserId(String token){
+    public Long getUserId(String token) {
         Claims claims = Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
         return Long.parseLong(String.valueOf(claims.get("userId")));
     }

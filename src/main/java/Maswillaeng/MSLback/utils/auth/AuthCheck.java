@@ -20,7 +20,6 @@ public @interface AuthCheck {
             this.level = level;
         }
 
-        // this < role
         public static boolean greaterThan(Role left, String target){
             return false;
         }

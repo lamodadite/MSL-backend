@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.nio.file.AccessDeniedException;
-
 import static Maswillaeng.MSLback.common.message.SuccessMessage.*;
 
 @RequiredArgsConstructor

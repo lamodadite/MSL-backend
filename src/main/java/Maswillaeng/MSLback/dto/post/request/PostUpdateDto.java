@@ -12,7 +12,6 @@ import java.util.List;
 @Getter
 public class PostUpdateDto {
 
-    // 이건 필요 없음
     private Long postId;
 
     private String thumbnail;

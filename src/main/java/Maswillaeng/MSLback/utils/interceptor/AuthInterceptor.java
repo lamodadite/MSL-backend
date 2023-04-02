@@ -1,18 +1,15 @@
 package Maswillaeng.MSLback.utils.interceptor;
 
-import Maswillaeng.MSLback.jwt.JwtTokenProvider;
 import Maswillaeng.MSLback.utils.auth.AuthCheck;
 import Maswillaeng.MSLback.utils.auth.TokenUserData;
 import Maswillaeng.MSLback.utils.auth.UserContext;
 import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.Ordered;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.security.auth.message.AuthException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.nio.file.AccessDeniedException;
@@ -22,7 +19,7 @@ import java.nio.file.AccessDeniedException;
 public class AuthInterceptor implements HandlerInterceptor, Ordered {
 
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
 
         HandlerMethod handlerMethod;
 
@@ -37,7 +34,7 @@ public class AuthInterceptor implements HandlerInterceptor, Ordered {
 
         TokenUserData userData = UserContext.userData.get();
 
-        if (userData==null) {
+        if (userData == null) {
             new NullPointerException("토큰이 없습니다.");
             return false;
         }
@@ -61,7 +58,7 @@ public class AuthInterceptor implements HandlerInterceptor, Ordered {
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-        UserContext.remove(); // 쓰레드 로컬 지워주기.
+        UserContext.remove();
     }
 
     @Override
