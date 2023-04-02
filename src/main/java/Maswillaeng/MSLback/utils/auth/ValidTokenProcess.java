@@ -1,9 +1,9 @@
 package Maswillaeng.MSLback.utils.auth;
 
+import Maswillaeng.MSLback.common.exception.JwtNotValidException;
 import Maswillaeng.MSLback.jwt.JwtTokenProvider;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
-import lombok.RequiredArgsConstructor;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -12,12 +12,12 @@ import java.io.IOException;
 
 public class ValidTokenProcess {
 
-    public static boolean execute(HttpServletRequest req, HttpServletResponse res,JwtTokenProvider jwtTokenProvider) throws IOException {
+    public static boolean execute(HttpServletRequest req, HttpServletResponse res, JwtTokenProvider jwtTokenProvider) throws IOException {
         String accessToken = new String();
         String refreshToken = new String();
 
         Cookie[] cookies = req.getCookies();
-        if (cookies != null) { // 쿠키가 존재한다면
+        if (cookies != null) {
             for (Cookie cookie : cookies) {
                 switch (cookie.getName()) {
                     case "ACCESS_TOKEN":
@@ -29,7 +29,7 @@ public class ValidTokenProcess {
             }
         }
 
-        if (!refreshToken.equals("")) { // 리프레시 토큰이 있다면
+        if (!refreshToken.equals("")) {
             try {
                 Claims claims = jwtTokenProvider.getClaims(refreshToken);
                 UserContext.userData.set(new TokenUserData(claims));
@@ -37,17 +37,14 @@ public class ValidTokenProcess {
                 res.sendRedirect("/api/login");
                 return false;
             }
-            // TODO : 나중에 Exception Handler JwtException, NullPointerException 로 관리 (401)
 
         } else if (!accessToken.equals("")) {
             try {
                 Claims claims = jwtTokenProvider.getClaims(accessToken);
                 UserContext.userData.set(new TokenUserData(claims));
             } catch (ExpiredJwtException exception) {
-                res.setStatus(401);  // 에러 만들기
-                return false;
+                throw new JwtNotValidException();
             }
-            // TODO : 나중에 Exception Handler JwtException, NullPointerException 로 관리
         }
         return true;
     }

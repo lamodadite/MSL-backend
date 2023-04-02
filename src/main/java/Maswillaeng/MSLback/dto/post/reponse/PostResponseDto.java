@@ -1,13 +1,16 @@
 package Maswillaeng.MSLback.dto.post.reponse;
 
 import Maswillaeng.MSLback.domain.entity.Post;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @NoArgsConstructor
-@Getter @Setter
+@Getter
+@Setter
 @AllArgsConstructor
 public class PostResponseDto {
     private Long postId;
@@ -40,9 +43,10 @@ public class PostResponseDto {
         this.likeCnt = likeCnt;
         this.commentCnt = commentCnt;
     }
+
     public PostResponseDto(long postId, long userId, String nickName, String userImage, String thumbnail
-            ,String title, String content, long hits, LocalDateTime createdAt, LocalDateTime modifiedAt
-            ,int likeCnt, int commentCnt) {
+            , String title, String content, long hits, LocalDateTime createdAt, LocalDateTime modifiedAt
+            , int likeCnt, int commentCnt) {
         this.postId = postId;
         this.userId = userId;
         this.nickName = nickName;

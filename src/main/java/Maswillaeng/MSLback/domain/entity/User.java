@@ -53,19 +53,13 @@ public class User extends BaseTimeEntity {
     private Set<Post> postList = new HashSet<>();
 
     @OneToMany(mappedBy = "user",fetch = FetchType.LAZY)
-    private List<Comment> commentList = new ArrayList<>(); // 회원이 탈퇴해도 댓글은 그대로 유지할 것인가?
+    private List<Comment> commentList = new ArrayList<>();
 
     @OneToMany(mappedBy = "follower",fetch = FetchType.LAZY)
     private Set<Follow> followerList = new HashSet<>();
 
     @OneToMany(mappedBy = "following",fetch = FetchType.LAZY)
     private Set<Follow> followingList = new HashSet<>();
-
-//    @OneToMany(mappedBy = "owner")
-//    private List<ChatRoom> ownerRooms = new ArrayList<>();
-//
-//    @OneToMany(mappedBy = "invited")
-//    private List<ChatRoom> invitedRooms = new ArrayList<>();
 
     public void destroyRefreshToken(){
         this.refreshToken = null;

@@ -3,7 +3,6 @@ package Maswillaeng.MSLback.domain.entity;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.loader.entity.CascadeEntityJoinWalker;
 
 import javax.persistence.*;
 

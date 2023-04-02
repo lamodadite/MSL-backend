@@ -1,8 +1,6 @@
 package Maswillaeng.MSLback.dto.post.request;
 
-import Maswillaeng.MSLback.domain.entity.HashTag;
 import Maswillaeng.MSLback.domain.entity.Post;
-import Maswillaeng.MSLback.domain.entity.Tag;
 import Maswillaeng.MSLback.domain.entity.User;
 import Maswillaeng.MSLback.domain.enums.Category;
 import lombok.Getter;
@@ -12,7 +10,6 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @NoArgsConstructor
 @Getter
