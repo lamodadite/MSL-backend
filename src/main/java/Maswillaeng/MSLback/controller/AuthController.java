@@ -118,4 +118,9 @@ public class AuthController {
         return ResponseEntity.ok().body(ResponseDto.of(
                 SUCCESS_SEND_PASSWORD_RESET_MAIL));
     }
+
+    @GetMapping("/")
+    public ResponseEntity<Object> awsHealthCheck() {
+        return ResponseEntity.ok().build();
+    }
 }
