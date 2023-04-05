@@ -9,6 +9,11 @@
 
 ### **⏳**작업 기간 (2023.01 ~ 2023.03)
 
+### 🔗링크
+- [마쉴랭 웹사이트](https://msl-frontend.vercel.app/) (현재는 AWS 비용 문제로 인해 닫아두었습니다)
+- [API 명세서](https://api.mashillaeng.site/swagger-ui/index.html#/)
+
+
 ### 😀팀 소개
 
 |         역할 |        이름 |
@@ -16,6 +21,12 @@
 | 프론트엔드 | 정채운 |
 | 백엔드 | 김민영 |
 | 백엔드 | 이종민 |
+
+### 📚 백엔드 협업 방식
+- 백엔드가 두명이지만 두 명 모두 모든 기능을 개발했습니다.
+- 정해진 기간동안 둘 다 같은 기능을 만들고, 서로의 코드를 비교하며 더 나은 방식에 대해 토론했습니다.
+- 더 낫다고 결론지은 한쪽의 코드를 머지하거나, 아예 새로운 코드를 함께 작성했습니다.
+- 때문에 각 기능의 기여도는 둘 다 80% 이상입니다.
 
 ### ⚒️주요 기능
 
@@ -65,7 +76,7 @@
 - Spring Data JPA
 - QueryDsl
 - Build : Gradle
-- Test : Junit5
+- Test : Postman
 - DB : MySQL
 - IDE : Intellij IDEA
 
@@ -146,6 +157,3 @@
 ![image](https://user-images.githubusercontent.com/67457956/229811170-498bb32a-2847-44df-8ee8-a23f19732bf3.png)
 
 
-## 📒API 명세서
-
-[API 명세서](https://api.mashillaeng.site/swagger-ui/index.html#/)
