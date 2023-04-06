@@ -4,6 +4,7 @@ import Maswillaeng.MSLback.domain.enums.Category;
 import Maswillaeng.MSLback.dto.common.ResponseDto;
 import Maswillaeng.MSLback.dto.post.request.PostRequestDto;
 import Maswillaeng.MSLback.dto.post.request.PostUpdateDto;
+import Maswillaeng.MSLback.service.AwsS3Service;
 import Maswillaeng.MSLback.service.PostService;
 import Maswillaeng.MSLback.utils.auth.AuthCheck;
 import Maswillaeng.MSLback.utils.auth.UserContext;
@@ -25,13 +26,14 @@ import static Maswillaeng.MSLback.common.message.SuccessMessage.*;
 public class PostController {
 
     private final PostService postService;
+    private final AwsS3Service awsS3Service;
 
     @ValidToken
     @PostMapping("/api/change-format-image")
-    public ResponseEntity<?> changeImageFormat(@RequestParam("photo") MultipartFile imageFile) throws IOException {
+    public ResponseEntity<?> changeImageFormat(@RequestParam("photo") MultipartFile imageFile) {
         return ResponseEntity.ok().body(ResponseDto.of(
                 SUCCESS_CHANGE_IMAGE_FORMAT,
-                postService.uploadImage(imageFile)));
+                awsS3Service.awsUploadImage(imageFile)));
     }
 
 

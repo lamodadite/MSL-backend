@@ -28,7 +28,7 @@ public class AwsS3Service {
     private String bucket;
 
     @Transactional
-    public Map<String, String> AwsUploadImage(MultipartFile imageFile) {
+    public Map<String, String> awsUploadImage(MultipartFile imageFile) {
         String uploadUrl = "";
         try {
             byte[] imageData = imageFile.getBytes();

@@ -48,7 +48,7 @@ public class SuccessMessage {
     public static String SUCCESS_GET_POST_LIST = "게시물 리스트 조회에 성공했습니다.";
     public static String SUCCESS_GET_USER_POST_LIST = "유저의 게시물 리스트 조회에 성공했습니다.";
     public static String SUCCESS_GET_REPORTED_POST_LIST = "신고 횟수가 50회 이상인 게시물 조회에 성공했습니다.";
-    public static String SUCCESS_CHANGE_IMAGE_FORMAT = "신고 횟수가 50회 이상인 게시물 조회에 성공했습니다.";
+    public static String SUCCESS_CHANGE_IMAGE_FORMAT = "이미지 타입 변환에 성공했습니다.";
 
     public static String SUCCESS_GET_BEST_HASHTAG = "인기 해시태그 조회에 성공했습니다.";
 
