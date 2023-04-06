@@ -30,15 +30,4 @@ public class AESEncryption {
 
         return Base64.getEncoder().encodeToString(encrypted);
     }
-
-    public String decrypt(String cipherText) throws Exception {
-        Cipher cipher = Cipher.getInstance(encryptionAlgo);
-        SecretKeySpec keySpec = new SecretKeySpec(SECRET_KEY.getBytes(), "AES");
-        IvParameterSpec ivParamSpec = new IvParameterSpec(SECRET_KEY.substring(0, 16).getBytes());
-        cipher.init(Cipher.DECRYPT_MODE, keySpec, ivParamSpec);
-
-        byte[] decodedBytes = Base64.getDecoder().decode(cipherText);
-        byte[] decrypted = cipher.doFinal(decodedBytes);
-        return new String(decrypted, "UTF-8");
-    }
 }

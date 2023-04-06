@@ -12,7 +12,7 @@ import static Maswillaeng.MSLback.common.message.SuccessMessage.*;
 
 @RequiredArgsConstructor
 @RestController
-public class FollowController { // TODO : 메서드 명 변경
+public class FollowController {
 
     private final FollowService followService;
 

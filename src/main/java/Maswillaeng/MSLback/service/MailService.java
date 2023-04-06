@@ -30,7 +30,7 @@ public class MailService {
         );
 
         String token = jwtTokenProvider.createPasswordResetToken();
-        String url = "http://localhost:3000/login/reset-password?token=" + token;
+        String url = "https://api.mashillaeng.site/login/reset-password?token=" + token;
 
         String subject = "비밀변호 변경 요청";
         String text = "<p>" + user.getNickName() + "님 안녕하세요.</p>" +
