@@ -23,11 +23,11 @@ public class Chat {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "chat_room_id")
-    private ChatRoom chatRoom; // 채팅방이 사라지면 채팅 데이터도 사라지는가?
+    private ChatRoom chatRoom;
 
     private Long senderId;
 
-    private Long recipientId; // ??  room 으로 브로드캐스트 하는데 굳이?
+    private Long recipientId;
 
     private String content;
 
