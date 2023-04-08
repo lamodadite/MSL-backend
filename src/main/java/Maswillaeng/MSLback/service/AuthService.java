@@ -14,6 +14,7 @@ import org.springframework.http.ResponseCookie;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import static Maswillaeng.MSLback.jwt.JwtTokenProvider.ACCESS_TOKEN_VALID_TIME;
 import static Maswillaeng.MSLback.jwt.JwtTokenProvider.REFRESH_TOKEN_VALID_TIME;
 
 @RequiredArgsConstructor
@@ -79,8 +80,9 @@ public class AuthService {
                         "ACCESS_TOKEN", accessToken)
                 .path("/")
                 .httpOnly(true)
-                .maxAge(REFRESH_TOKEN_VALID_TIME)
-                .sameSite("Lax")
+                .secure(true)
+                .maxAge(ACCESS_TOKEN_VALID_TIME)
+                .sameSite("none")
                 .build();
     }
 
@@ -89,8 +91,9 @@ public class AuthService {
                         "REFRESH_TOKEN", refreshToken)
                 .path("/api/update-token")
                 .httpOnly(true)
+                .secure(true)
                 .maxAge(REFRESH_TOKEN_VALID_TIME)
-                .sameSite("Lax")
+                .sameSite("none")
                 .build();
     }
 
