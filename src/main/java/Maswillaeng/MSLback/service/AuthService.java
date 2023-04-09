@@ -80,9 +80,8 @@ public class AuthService {
                         "ACCESS_TOKEN", accessToken)
                 .path("/")
                 .httpOnly(true)
-                .secure(true)
                 .maxAge(ACCESS_TOKEN_VALID_TIME)
-                .sameSite("none")
+                .sameSite("LAX")
                 .build();
     }
 
@@ -91,9 +90,8 @@ public class AuthService {
                         "REFRESH_TOKEN", refreshToken)
                 .path("/api/update-token")
                 .httpOnly(true)
-                .secure(true)
                 .maxAge(REFRESH_TOKEN_VALID_TIME)
-                .sameSite("none")
+                .sameSite("LAX")
                 .build();
     }
 

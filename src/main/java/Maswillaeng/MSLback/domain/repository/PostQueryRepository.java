@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.LockModeType;
 import java.util.List;
 import java.util.Optional;
 
@@ -67,6 +68,7 @@ public class PostQueryRepository extends QuerydslRepositorySupport {
                 .leftJoin(post.user).fetchJoin()
                 .leftJoin(post.postLikeList).fetchJoin()
                 .where(post.id.eq(postId).and(post.disabled.eq(0)))
+                .setLockMode(LockModeType.PESSIMISTIC_WRITE)
                 .fetchOne());
     }
 
